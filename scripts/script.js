@@ -1,5 +1,9 @@
 
 let operation = [];
+let signOn = false;
+
+let currentValue = "";
+let nextValue = "";
 
 const equal = document.querySelector(".equal")
 const clear = document.querySelector(".clear")
@@ -11,40 +15,77 @@ buttons.forEach((button) => {
     button.addEventListener("click", () => {
 
         display.textContent = button.textContent;
-        let item = display.textContent;
 
-        if(operation.length !== 1 && typeof(checkIfOperator(item)) === "number"){
+        let item = display.textContent;
+    
+
+        if(typeof(checkIfOperator(item)) === "number"){
+
             console.log(operation)
-            operation.push(checkIfOperator(item))
+            currentValue += item; 
+
+            console.log(currentValue)
+            display.textContent = currentValue;
         }
-        if(operation.length === 1 && checkIfOperator(item) === true){
+        if(checkIfOperator(item) === true){
+
+
+            if(operation.length !== 1){
+
+              operation.push(checkIfOperator(currentValue));
+              nextValue = currentValue;
+              currentValue = "";
+            }
+
             console.log(operation)
             operation.push(item)
         }
-        if(operation.length === 3){
+
+        if(operation.length >= 3){
             console.log(operation)
+            if (operate(...operation) === "Div0"){
+                display.textContent = "Division by 0"
+                operation = []
+                return;
+            }
             result = operate(...operation);
             display.textContent = result
-            operation = [result];
+            operation = [result, item];
         }
         
     })
 })
 
-// equal.addEventListener("click", () => {
-//     if(operation.length === 3){
-//         console
-//     }
-// })
-
 clear.addEventListener("click", () => {
+    display.textContent = "0"
+    currentValue = ""
+    nextValue = ""
     operation = []
-    display.textContent =""
 })
 
 
+equal.addEventListener("click", () => {
+    if(currentValue != ""){
+        operation.push(parseInt(currentValue));
+        nextValue = currentValue;
+        currentValue = "";
+
+        console.log(operation)
+        if (operate(...operation) === "Div0"){
+            display.textContent = "Division by 0"
+            operation = []
+            return;
+        }
+        result = operate(...operation);
+        display.textContent = result
+        operation = [result];
+
+        console.log(operation)
+    }
+})
+
 function checkIfOperator(string) {
-    if(string === "+" ||string === "-" || string === "*" || string === "/" ){
+    if(string === "+" ||string === "-" || string === "*" || string === "/" || string === "="){
         return true;
     }
     else{
@@ -87,7 +128,8 @@ function divide(x, y) {
     return x / y
    }
    else{
-    return "Divison By 0"
+    operation = [];
+    return "Div0";
    }
 }
 

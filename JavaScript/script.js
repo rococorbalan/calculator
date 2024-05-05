@@ -27,8 +27,6 @@ buttons.forEach((button) => {
         display.textContent = button.textContent;
 
         let item = display.textContent;
-        console.log(`${item}, ${operation}`)
-        
 
 
         if(typeof(checkIfOperator(item)) === "number"){
@@ -36,13 +34,11 @@ buttons.forEach((button) => {
             activateOperators(operators);
             currentValue += item; 
 
-            // console.log(currentValue)
             display.textContent = currentValue;
         }
 
         if(checkIfOperator(item) === true){
             decimalOn = false;
-            // console.log(operation)
             if(operation.length !== 1){
                 operation.push(parseFloat(currentValue));
                 nextValue = currentValue;
@@ -50,12 +46,10 @@ buttons.forEach((button) => {
             }
             
             operation.push(item);
-            // console.log(operation)
             deactivateOperators(operators);
         }
 
         if(operation.length >= 3){
-            // console.log(operation)
             if (operate(...operation) === "Div0"){
                 display.textContent = "Division by 0"
                 operation = []

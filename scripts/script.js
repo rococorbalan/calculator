@@ -10,6 +10,7 @@ let decimalOn = false;
 
 const decimal = document.querySelector(".decimal")
 const equal = document.querySelector(".equal")
+const erase = document.querySelector(".erase")
 const clear = document.querySelector(".clear")
 const display = document.querySelector(".display");
 
@@ -76,6 +77,18 @@ clear.addEventListener("click", () => {
     currentValue = ""
     nextValue = ""
     operation = []
+})
+
+
+erase.addEventListener("click",() => {
+    if(currentValue !== ""){
+        currentValue = currentValue.substring(0, currentValue.length - 1);
+
+        display.textContent = currentValue;
+    }
+    if (currentValue === ""){
+        display.textContent = 0;
+    }
 })
 
 

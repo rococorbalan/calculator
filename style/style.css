@@ -1,8 +1,102 @@
-.display {
-    background-color: black;
-    text-align: right;
-    width: 250px;
-    height: 25px;
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 
-    color: green;
+* {
+    font-family: "Ubuntu", monospace;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calculator {
+    background-color: #d2d3db;
+
+    min-width: 350px;
+    min-height: 500px;
+    max-width: 350px;
+    max-height: 500px;
+
+    padding: 25px;
+    border-radius: 20px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.display {
+    background-color: #fafafa;
+    height: 50px;
+    border-radius: 15px;
+    text-align: right;
+    padding: 10px;
+    font-size: xxx-large;
+    overflow: hidden;
+}
+
+.buttons {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+}
+
+.num-pad {
+    display: flex;
+    flex-flow: row-reverse wrap-reverse;
+    align-items: center;
+    justify-content: space-between;
+    flex: 5;
+    margin-right: 10px;
+}
+
+.signs {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex: 1;
+}
+
+button{
+    width: 75px;
+    height: 75px;
+
+    border-radius: 15px;
+    border: none;
+
+    font-size: larger;
+    transition: background-color, 0.2s ease;
+}
+
+button:hover {
+    background-color: #adaed6;
+}
+
+button:active {
+    background-color: #666a96 ;
+}
+
+button:disabled:hover {
+    background-color: rgba(239, 239, 239, 0.3);
+}
+
+.clear, .erase {
+    height: 50px;
+    background-color: #bcbfe0;
+}
+
+.erase {
+    flex: 1;
+}
+
+.clear {
+    flex: 4;
+    margin-right: 10px;
+}
+
+.erasers {
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 10px 0 5px 0px;
 }
